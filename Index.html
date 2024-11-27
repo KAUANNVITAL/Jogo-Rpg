@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A Lenda da Espada Eterna</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2f2f2f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .content {
+            margin: 20px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+        }
+        .choices button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .choices button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #1a1a1a;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        
+
+        }
+    </style>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<header>
+    <h1>A Lenda da Espada Eterna</h1>
+</header>
+
+<div class="content">
+    <h2>Bem-vindo, Aventureiro!</h2>
+    <p>Você está prestes a embarcar em uma jornada épica para descobrir a Espada Eterna, mas cuidado: a jornada é cheia de escolhas e desafios. Seu destino dependerá das suas decisões.</p>
+
+    <div class="choices">
+        <button onclick="startAdventure()">Começar a Aventura</button>
+    </div>
+</div>
+
+<div id="gameProgress" class="content" style="display: none;">
+    <h2>Escolha o Caminho</h2>
+    <p id="storyText"></p>
+
+    <div class="choices">
+        <button id="choice1" onclick="makeChoice(1)">Escolha 1</button>
+        <button id="choice2" onclick="makeChoice(2)">Escolha 2</button>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 A Lenda da Espada Eterna | RPG</p>
+</div>
+
+<script>
+    let currentStep = 0;
+
+    function startAdventure() {
+        document.querySelector('.content').style.display = 'none';
+        document.getElementById('gameProgress').style.display = 'block';
+        currentStep = 1;
+        updateStory();
+    }
+
+    function updateStory() {
+        const storyText = document.getElementById('storyText');
+        const choice1 = document.getElementById('choice1');
+        const choice2 = document.getElementById('choice2');
+        
+        if (currentStep === 1) {
+            storyText.textContent = "Você se encontra nas misteriosas terras de Eldor. Diante de você há duas opções: seguir pela Floresta dos Elfos, em busca de sabedoria, ou explorar as Ruínas de Eldoria, em busca de poder sombrio.";
+            choice1.textContent = "Seguir pela Floresta dos Elfos";
+            choice2.textContent = "Explorar as Ruínas de Eldoria";
+        } else if (currentStep === 2) {
+            const path = choice1.textContent === "Seguir pela Floresta dos Elfos" ? "floresta" : "ruinas";
+            if (path === "floresta") {
+                storyText.textContent = "Você se aventura pela Floresta dos Elfos, onde encontra um velho elfo que lhe oferece um enigma. Você precisa responder corretamente ou ser forçado a abandonar sua jornada.";
+                choice1.textContent = "Tentar resolver o enigma";
+                choice2.textContent = "Abandonar e voltar para o início";
+            } else {
+                storyText.textContent = "Você entra nas Ruínas de Eldoria, onde o espírito sombrio de um antigo guardião oferece um pacto: você poderá ganhar poder, mas terá que ceder sua alma.";
+                choice1.textContent = "Aceitar o pacto";
+                choice2.textContent = "Recusar e sair das ruínas";
+            }
+        } else {
+            // Continue com mais etapas conforme a escolha do jogador
+        }
+    }
+
+    function makeChoice(choice) {
+        if (currentStep === 1) {
+            currentStep = 2;
+            updateStory();
+        } else if (currentStep === 2) {
+            if (choice === 1) {
+                // Ação para a escolha 1 na etapa 2
+                alert("Você fez a escolha 1.");
+            } else if (choice === 2) {
+                // Ação para a escolha 2 na etapa 2
+                alert("Você fez a escolha 2.");
+            }
+        }
+    }
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
